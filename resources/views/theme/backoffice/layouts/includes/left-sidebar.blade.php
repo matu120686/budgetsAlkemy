@@ -35,12 +35,17 @@
         <li class="no-padding">
             <ul class="collapsible" data-collapsible="accordion">
                 <li class="bold">
-                <a href="#" class="waves-effect waves-cyan">
-                        <i class="material-icons">pie_chart_outlined</i>
-                        <span class="nav-text">Panel de administración</span>
-                    </a>
-                </li>
-                
+                    <a href="{{route('backoffice.budjet.index')}}" class="waves-effect waves-cyan">
+                        <i class="material-icons">list</i>
+                        <span class="nav-text">Listado de Presupuestos</span>
+                    </a>                    
+                </li>    
+                <li class="bold">
+                    <a href="{{route('backoffice.budjet.create')}}" class="waves-effect waves-cyan">
+                        <i class="material-icons">settings_applications</i>
+                        <span class="nav-text">Crear Presupuesto</span>
+                    </a>                    
+                </li>           
 
             </ul>
         </li>

@@ -18,3 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['middleware' => ['auth' ], 'as' => 'backoffice.'], function(){
+
+    //Route::get('/role', 'RoleController@index')->name('role.index');
+
+    Route::resource('budjet', 'BudjetController');
+
+});

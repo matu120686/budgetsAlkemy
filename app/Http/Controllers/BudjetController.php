@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Budjet;
 use Illuminate\Http\Request;
+use App\Http\Requests\BudgetRequest;
 
 class BudjetController extends Controller
 {
@@ -12,9 +13,17 @@ class BudjetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Budjet $budjet)
     {
-        //
+        /*return view('theme.backoffice.pages.budjet.index',[
+            'budjets' => Budjet::all(),
+        ])->paginate(10);*/
+
+        $budjet = Budjet::orderBy('created_at','asc')->paginate(10);
+        //select * from pots
+         return view('theme.backoffice.pages.budjet.index',['budjets' => $budjet]);
+
+         
     }
 
     /**
@@ -24,7 +33,7 @@ class BudjetController extends Controller
      */
     public function create()
     {
-        //
+        return view('theme.backoffice.pages.budjet.create');
     }
 
     /**
@@ -33,9 +42,14 @@ class BudjetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BudgetRequest $request , Budjet $budjet)
     {
-        //
+        ///($request);
+        $budjet = $budjet->store($request);      
+
+         //return view('theme.backoffice.pages.budjet.create');
+         return redirect()->route('backoffice.budjet.index',$budjet);
+
     }
 
     /**
