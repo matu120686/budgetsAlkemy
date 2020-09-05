@@ -18,6 +18,7 @@ class CreateBudjetsTable extends Migration
             $table->string('concept');
             $table->string('budget_type');           
             $table->bigInteger('amount');
+            $table->date('date');
             $table->timestamps();
         });
     }

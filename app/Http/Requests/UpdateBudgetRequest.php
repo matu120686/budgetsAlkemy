@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BudgetRequest extends FormRequest
+class UpdateBudgetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,7 @@ class BudgetRequest extends FormRequest
             'budget_type'=>'required',
             'amount' => 'required|int|min:0',
             'date' =>'required'
-             
+            
 
            
         ];
@@ -39,12 +39,11 @@ class BudgetRequest extends FormRequest
     {
         return[
             'concept.required' => '* El Concepto del Presupuesto es requerido',
-            'budget_type.required' => ' Debe Seleccionar el tipo de Presupuesto',
+            'budget_type.required' => '* Debe Seleccionar el tipo de Presupuesto',
             'amount.required' => '* El campo Descripción es requerido',
-            'date.required' => 'Ingresar fecha de Presupuesto'
+            'date.required' => '* Ingresar fecha de Presupuesto'
             
         ];
     }
-
-
+    
 }

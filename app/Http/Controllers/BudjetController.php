@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Budjet;
 use Illuminate\Http\Request;
 use App\Http\Requests\BudgetRequest;
+use App\Http\Requests\UpdateBudgetRequest;
 
 class BudjetController extends Controller
 {
@@ -14,14 +15,23 @@ class BudjetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Budjet $budjet)
-    {
-        /*return view('theme.backoffice.pages.budjet.index',[
-            'budjets' => Budjet::all(),
-        ])->paginate(10);*/
+    {        
 
-        $budjet = Budjet::orderBy('created_at','asc')->paginate(10);
-        //select * from pots
-         return view('theme.backoffice.pages.budjet.index',['budjets' => $budjet]);
+        $budjet = Budjet::orderBy('date','desc')->paginate(10);
+
+        //$user_productos = User::with('productos')->where('name', $name)->get();
+
+       $entry_budget =Budjet::where('budget_type','Ingreso')->sum('amount');       
+       $exit_budget =Budjet::where('budget_type','Egreso')->sum('amount');
+       
+       $balance_budget = $entry_budget - $exit_budget;      
+                
+           
+        
+         return view('theme.backoffice.pages.budjet.index',[
+             'budjets' => $budjet,
+             'balance_budgets'=> $balance_budget
+             ]);
 
          
     }
@@ -71,7 +81,9 @@ class BudjetController extends Controller
      */
     public function edit(Budjet $budjet)
     {
-        //
+        return view('theme.backoffice.pages.budjet.edit',[
+            'budjet' => $budjet,
+        ]);
     }
 
     /**
@@ -81,9 +93,11 @@ class BudjetController extends Controller
      * @param  \App\Budjet  $budjet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Budjet $budjet)
+    public function update(UpdateBudgetRequest $request, Budjet $budjet)
     {
-        //
+         dd($budjet->my_update($request));
+        
+       return redirect()->route('backoffice.budjet.index');
     }
 
     /**

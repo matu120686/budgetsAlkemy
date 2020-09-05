@@ -18,13 +18,14 @@
                         <div class="card-content">                                
                             <span class="card-title">Crear Presupuesto</span>
                             <div class="row">
-                                <form  class="col s12" method="POST" action="{{route('backoffice.budjet.store')}}">
+                                <form  class="col s12" method="POST" action="{{route('backoffice.budjet.update',$budjet)}}">
 
                                     {{ csrf_field() }}
+                                    {{method_field('PUT')}}
 
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="concept" type="text" name="concept">
+                                        <input id="concept" type="text" name="concept" value=" {{$budjet->concept}}">
                                             <label for="concept">Concepto</label>
                                                @if ($errors->has('concept'))
                                                     <span class="invalid-feedback" role="alert">
@@ -36,23 +37,19 @@
                                     
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <select name="budget_type" id="budget_type" class="validate">
-                                              <option value="" disabled selected>-- Tipo --</option>
-                                              <option value="Ingreso">Ingreso</option>
-                                              <option value="Egreso">Egreso</option>
-                                            </select>
-                                            <label for="budget_type">Tipo de Presupuesto</label>
-                                                @if ($errors->has('budget_type'))
+                                                <input id="budget_type" type="text" name="budget_type" value=" {{$budjet->budget_type}}" disabled>
+                                             <label for="budget_type">Tipo de Presupuesto</label>
+                                                {{--@if ($errors->has('budget_type'))
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong >{{ $errors->first('budget_type') }}</strong>
                                                     </span>
-                                                @endif  
-                                          </div>                                          
+                                                @endif --}}
+                                        </div>                                          
                                     </div>
 
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="amount" type="number" min="0" name="amount">
+                                            <input id="amount" type="number" name="amount" value="{{$budjet->amount}}">
                                             <label for="amount">Monto</label>
                                                @if ($errors->has('amount'))
                                                     <span class="invalid-feedback" role="alert">
@@ -61,9 +58,10 @@
                                                 @endif
                                         </div>
                                     </div>
+                                    
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="date" type="date"  name="date">
+                                            <input id="date" type="date"  name="date" value="{{$budjet->date}}">
                                             <br>                                            
                                                @if ($errors->has('amount'))
                                                     <span class="invalid-feedback" role="alert">
@@ -72,15 +70,15 @@
                                                 @endif
                                         </div>
                                     </div>
-
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <button class="btn waves-effect waves-light right" type="submit">Guardar
-                                                <i class="material-icons right">send</i>
-                                                </button>
-                                            </div>
+                                        
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <button class="btn waves-effect waves-light right" type="submit">Actualizar
+                                            <i class="material-icons right">send</i>
+                                            </button>
                                         </div>
                                     </div>
+                                    
                                     
                                 </form>
                             </div>
@@ -89,12 +87,7 @@
                 </div>                
             </div> 
         </div>
-    </div>
-    
-
-      
- 
-        
+    </div>       
    
 @endsection
 
@@ -106,27 +99,3 @@
 
 
 
-{{--@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
---}}

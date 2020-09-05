@@ -9,7 +9,7 @@
     <script src="/assets/js/custom-script.js"></script>
 
     
-    <script src="/vendor/sweetalert/sweetalert.all.js"></script>
+    <script src="/assets/vendors/swal/sweetalert2.all.min.js"></script>
 
     
 
